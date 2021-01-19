@@ -26,7 +26,7 @@ namespace limits {
     const REG_ALL_LED_OFF_H: number = 0xFD;         // All LED off high register address 
     const REG_PRE_SCALE: number = 0xFE;             // Pre-scaler register address
 
-    const PWM_FREQUENCY: number = 0x1E;             // Pre-scaler value for 50Hz
+    const PWM_FREQUENCY: number = 30;             // Pre-scaler value for 50Hz
 
     
 // If you wanted to write some code that stepped through the servos then this is the BASe and size to do that 	
