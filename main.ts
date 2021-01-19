@@ -7,7 +7,7 @@
  * 1mS - 2mS (so called industry default standard), 0.9mS - 2.1mS, 0.8mS - 2.2mS, 0.7mS - 2.3mS, 0.6mS - 2.4mS and 0.5mS - 2.5mS. 
  * The PWM frequency is set to 50Hz making each bit of the PCA9685 4096 count equal to 4.88uS
  */
-//% weight=100 color=#00A654 icon="\uf085" block="I2C 16ch Servo Limits"
+//% weight=100 color=#10A654 icon="\uf085" block="Limits"
 namespace limits {
 
 // PCA9685 address definitions. 
@@ -36,9 +36,9 @@ namespace limits {
     let ServoMultiplier = 226
     let ServoZeroOffset = 0x66
 
-    let PCA9865_init: boolean = false //a flag to allow us to initialise without explicitly calling the secret incantation
+    let PCA9685_init: boolean = false //a flag to allow us to initialise without explicitly calling the secret incantation
 
-    //nice big list of servos for the block to use. These represent register offsets in the PCA9865
+    //nice big list of servos for the block to use. These represent register offsets in the PCA9685
     export enum Servos {
         Servo1 = 0x08,
         Servo2 = 0x0C,
@@ -137,12 +137,12 @@ namespace limits {
         buf[0] = REG_MODE1;                                 //
         buf[1] = 0x01;                                      // Normal mode, start oscillator and allow LED all call registers
         pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false)       // Write to PCA9865
-        PCA9865_init = true;                                // The PCA9865 is now initialised, no need to do it again
+        PCA9685_init = true;                                // The PCA9865 is now initialised, no need to do it again
     }
 	
     /**
      * Sets the requested servo to the reguested angle.
-	 * if the PCA has not yet been initialised calls the initialisation routine
+	 * If the PCA9685 has not yet been initialised calls the initialisation routine
 	 *
      * @param Servo Which servo to set
 	 * @param degrees the angle to set the servo to
@@ -152,7 +152,7 @@ namespace limits {
 	//% degrees.min=0 degrees.max=180
 	
     export function servoWrite(Servo: Servos, degrees: number): void {
-        if (PCA9865_init == false) {
+        if (PCA9685_init == false) {
             initialisation()
         }
         let buf = pins.createBuffer(2)
