@@ -121,23 +121,24 @@ namespace limits {
         let buf = pins.createBuffer(2)                      // Create a buffer for i2c bus data
         buf[0] = REG_PRE_SCALE;                             // Point at pre-scaler register
         buf[1] = PWM_FREQUENCY;                             // Set PWM frequency to 50Hz or repetition rate of 20mS
-        pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false);      // Write to PCA9865 
+        //pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false);      // Write to PCA9685 
         buf[0] = REG_ALL_LED_ON_L;                          // 
         buf[1] = 0x00;                                      // Start high pulse at 0 (0-0x199) 
-        pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false);      // Write to PCA9865
+        pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false);      // Write to PCA9685
         buf[0] = REG_ALL_LED_ON_H;                          //  
         buf[1] = 0x00;                                      // Start each frame with pulse high
-        pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false);      // Write to PCA9865
+        pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false);      // Write to PCA9685
         buf[0] = REG_ALL_LED_OFF_L;                         //
         buf[1] = 0x23;                                      // End high pulse at mid range 1.5mS = 1500/4.88uS = 307 (0x133)
-        pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false);      // Write to PCA9865
+        pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false);      // Write to PCA9685
         buf[0] = REG_ALL_LED_OFF_H;                         //
         buf[1] = 0x01;                                      // End high pulse at mid range 1.5mS = 1500/4.88uS = 307 (0x133)
-        pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false);      // Write to PCA9865
+        pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false);      // Write to PCA9685
         buf[0] = REG_MODE1;                                 //
         buf[1] = 0x01;                                      // Normal mode, start oscillator and allow LED all call registers
-        pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false)       // Write to PCA9865
-        PCA9685_init = true;                                // The PCA9865 is now initialised, no need to do it again
+        pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false)       // Write to PCA9685
+        basic.pause(10);                                    // Let oscillator start and settle 
+        PCA9685_init = true;                                // The PCA9685 is now initialised, no need to do it again
     }
 	
     /**
@@ -152,9 +153,10 @@ namespace limits {
 	//% degrees.min=0 degrees.max=180
 	
     export function servoWrite(Servo: Servos, degrees: number): void {
-        if (PCA9685_init == false) {
-            initialisation()
+        if (PCA9685_init == false) {                        // PCA9685 initialised?
+            initialisation();                               // No, then initialise it 
         }
+        /*
         let buf = pins.createBuffer(2)
         let HighByte = false
         let deg100 = degrees * 100
@@ -177,5 +179,6 @@ namespace limits {
             buf[1] = 0x00
         }
         pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false)
+        */
     }
 }
