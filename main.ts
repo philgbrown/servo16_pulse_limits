@@ -36,7 +36,7 @@ namespace limits {
     let ServoMultiplier = 226
     let ServoZeroOffset = 0x66
 
-    let PCA9685_init: boolean = false //a flag to allow us to initialise without explicitly calling the secret incantation
+    let PCA9685_init: boolean = false               // Flag to allow us to initialise without explicitly calling the initialisation function 
 
     //nice big list of servos for the block to use. These represent register offsets in the PCA9685
     export enum Servos {
@@ -121,7 +121,8 @@ namespace limits {
         let buf = pins.createBuffer(2)                      // Create a buffer for i2c bus data
         buf[0] = REG_PRE_SCALE;                             // Point at pre-scaler register
         buf[1] = PWM_FREQUENCY;                             // Set PWM frequency to 50Hz or repetition rate of 20mS
-        //pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false);      // Write to PCA9685 
+        basic.showNumber(buf[1]);
+        pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false);      // Write to PCA9685 
         buf[0] = REG_ALL_LED_ON_L;                          // 
         buf[1] = 0x00;                                      // Start high pulse at 0 (0-0x199) 
         pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false);      // Write to PCA9685
