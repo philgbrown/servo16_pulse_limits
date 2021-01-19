@@ -105,6 +105,11 @@ namespace limits {
         }
     }
 
+    function readReg(addr: number, reg: number): number {       // Read 8 bit big-endian unsigned integer
+        pins.i2cWriteNumber(addr, reg, NumberFormat.UInt8LE);
+        return pins.i2cReadNumber(addr, NumberFormat.UInt8LE);
+    }
+
 	/*
 	* This initialisation function sets up the PCA9865 servo driver chip. 
     * The PCA9685 comes out of reset in low power mode with the internal oscillator off with no output signals, this allows writes to the pre-scaler register.
@@ -121,8 +126,9 @@ namespace limits {
         let buf = pins.createBuffer(2)                      // Create a buffer for i2c bus data
         buf[0] = REG_PRE_SCALE;                             // Point at pre-scaler register
         buf[1] = PWM_FREQUENCY;                             // Set PWM frequency to 50Hz or repetition rate of 20mS
-        basic.showNumber(buf[1]);
         pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false);      // Write to PCA9685 
+        let data = readReg(CHIP_ADDRESS, REG_PRE_SCALE);
+        basic.showNumber(data);
         buf[0] = REG_ALL_LED_ON_L;                          // 
         buf[1] = 0x00;                                      // Start high pulse at 0 (0-0x199) 
         pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false);      // Write to PCA9685
