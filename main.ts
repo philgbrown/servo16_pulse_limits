@@ -26,7 +26,7 @@ namespace i2c_16_servo_limits {
     const REG_ALL_LED_OFF_H: number = 0xFD;         // All LED off high register address 
     const REG_PRE_SCALE: number = 0xFE;             // Pre-scaler register address
 
-    const PWM_FREQUENCY: number = 0x79;             // Pre-scaler value for 50Hz
+    const PWM_FREQUENCY: number = 0x1E;             // Pre-scaler value for 50Hz
 
     
 // If you wanted to write some code that stepped through the servos then this is the BASe and size to do that 	
@@ -141,7 +141,7 @@ namespace i2c_16_servo_limits {
     }
 	
     /**
-     * sets the requested servo to the reguested angle.
+     * Sets the requested servo to the reguested angle.
 	 * if the PCA has not yet been initialised calls the initialisation routine
 	 *
      * @param Servo Which servo to set
