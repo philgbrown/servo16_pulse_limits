@@ -8,7 +8,7 @@
  * The PWM frequency is set to 50Hz making each bit of the PCA9685 4096 count equal to 4.88uS
  */
 //% weight=100 color=#00A654 icon="\uf085" block="I2C 16ch Servo Limits"
-namespace i2c_16_servo_limits {
+namespace limits {
 
 // PCA9685 address definitions. 
     const CHIP_ADDRESS: number = 0x6A;              // Default Kitronik Chip address
