@@ -7,7 +7,7 @@
  * 1mS - 2mS (so called industry default standard), 0.9mS - 2.1mS, 0.8mS - 2.2mS, 0.7mS - 2.3mS, 0.6mS - 2.4mS and 0.5mS - 2.5mS. 
  * The PWM frequency is set to 50Hz making each bit of the PCA9685 4096 count equal to 4.88uS
  */
-//% weight=100 color=#00A654 icon="\uf085" block="I2C 16-Servo limits"
+//% weight=100 color=#00A654 icon="\uf085" block="I2C 16ch Servo Limits"
 namespace i2c_16_servo_limits {
 
 // PCA9685 address definitions. 
@@ -147,7 +147,7 @@ namespace i2c_16_servo_limits {
      * @param Servo Which servo to set
 	 * @param degrees the angle to set the servo to
      */
-    //% blockId=kitronik_I2Cservo_write
+    //% blockId=I2C_servo_write
     //% block="set%Servo|to%degrees"
 	//% degrees.min=0 degrees.max=180
 	
