@@ -1,5 +1,5 @@
 /**
- * Blocks for driving the Kitronik I2C 16-Servo Driver Board (PCA9685) with configurable pulse widths
+ * Blocks for driving the I2C 16-Servo Driver Board (PCA9685) with configurable pulse widths
  * This extension provides an additional block that allows the minimum and maximum pulse width of the servo signal to be set 
  * The original extension had the minimum pulse width at 550us and the maximum pulse width at 2700uS. These settings cause some servo 
  * motors to growl and over heat when positioned at 0 or 180 degrees. This situation will cause servo motors to fail.  
@@ -7,11 +7,11 @@
  * 1mS - 2mS (so called industry default standard), 0.9mS - 2.1mS, 0.8mS - 2.2mS, 0.7mS - 2.3mS, 0.6mS - 2.4mS and 0.5mS - 2.5mS. 
  * The PWM frequency is set to 50Hz making each bit of the PCA9685 4096 count equal to 4.88uS
  */
-//% weight=100 color=#10A654 icon="\uf085" block="Limits"
+
 namespace limits {
 
 // PCA9685 address definitions. 
-    const CHIP_ADDRESS: number = 0x6A;              // Default Kitronik Chip address
+    const CHIP_ADDRESS: number = 0x6A;              // Default Chip address
     const REG_MODE1: number = 0x00;                 // Mode 1 register address 
     const REG_MODE2: number = 0x01;                 // Mode 2 register address 
     const REG_SUB_ADR1: number = 0x02;              // Sub address register 1 address
@@ -30,11 +30,11 @@ namespace limits {
 
     
 // If you wanted to write some code that stepped through the servos then this is the BASe and size to do that 	
-	let Servo1RegBase = 0x08 
-    let ServoRegDistance = 4
+//	let Servo1RegBase = 0x08 
+//   let ServoRegDistance = 4
 	//To get the PWM pulses to the correct size and zero offset these are the default numbers. 
-    let ServoMultiplier = 226
-    let ServoZeroOffset = 0x66
+ //   let ServoMultiplier = 226
+  //  let ServoZeroOffset = 0x66
 
     let PCA9685_init: boolean = false               // Flag to allow us to initialise without explicitly calling the initialisation function 
 
@@ -78,6 +78,8 @@ namespace limits {
     // a better trim function that does the maths for the end user could be exposed, the basics are here 
 	// for reference
 
+    /*
+
     export function TrimServoMultiplier(Value: number) {
         if (Value < 113) {
             ServoMultiplier = 113
@@ -104,6 +106,7 @@ namespace limits {
             }
         }
     }
+    */
 
     function readReg(addr: number, reg: number): number {       // Read 8 bit big-endian unsigned integer
         pins.i2cWriteNumber(addr, reg, NumberFormat.UInt8LE);
@@ -129,7 +132,7 @@ namespace limits {
         pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false);      // Write to PCA9685 
         let data = readReg(CHIP_ADDRESS, REG_PRE_SCALE);
         basic.showNumber(data);
-        buf[0] = REG_ALL_LED_ON_L;                          // 
+        buf[0] = REG_ALL_LED_ON_L;                          // Point at ALL LED ON low byte register 
         buf[1] = 0x00;                                      // Start high pulse at 0 (0-0x199) 
         pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false);      // Write to PCA9685
         buf[0] = REG_ALL_LED_ON_H;                          //  
