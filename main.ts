@@ -139,7 +139,7 @@ namespace limits {
         buf[1] = 0x00;                                      // Start each frame with pulse high
         pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false);      // Write to PCA9685
         buf[0] = REG_ALL_LED_OFF_L;                         //
-        buf[1] = 0x23;                                      // End high pulse at mid range 1.5mS = 1500/4.88uS = 307 (0x133)
+        buf[1] = 0x11;                                      // End high pulse at mid range 1.5mS = 1500/4.88uS = 307 (0x133)
         pins.i2cWriteBuffer(CHIP_ADDRESS, buf, false);      // Write to PCA9685
         buf[0] = REG_ALL_LED_OFF_H;                         //
         buf[1] = 0x01;                                      // End high pulse at mid range 1.5mS = 1500/4.88uS = 307 (0x133)
