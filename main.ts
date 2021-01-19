@@ -5,7 +5,7 @@
  * motors to growl and over heat when positioned at 0 or 180 degrees. This situation will cause servo motors to fail.  
  * The extra block will allow each of the 16 servo outputs to be individually configured to one of the following six pulse ranges: 
  * 1mS - 2mS (so called industry default standard), 0.9mS - 2.1mS, 0.8mS - 2.2mS, 0.7mS - 2.3mS, 0.6mS - 2.4mS and 0.5mS - 2.5mS. 
- * The PWM frequency is set to 50Hz making each bit of the 4096 count equal to 4.88uS
+ * The PWM frequency is set to 50Hz making each bit of the PCA9685 4096 count equal to 4.88uS
  */
 //% weight=100 color=#00A654 icon="\uf085" block="I2C 16-Servo"
 namespace i2c_16_servo_limits {
