@@ -74,7 +74,7 @@ namespace limits {
     //Trim the servo pulses. These are here for advanced users, and not exposed to blocks.
     //It appears that servos I've tested are actually expecting 0.5 - 2.5mS pulses, 
     //not the widely reported 1-2mS 
-    //that equates to multiplier of 226, and offset of 0x66
+    //that equates to a multiplier of 226, and an offset of 0x66
     // a better trim function that does the maths for the end user could be exposed, the basics are here 
 	// for reference
 
