@@ -1,5 +1,5 @@
 /**
- * Blocks for driving the I2C 16-Servo Driver Board (PCA9685) with configurable pulse widths
+ * A PXT extension for driving the I2C bus 16-Servo Driver Board (PCA9685) by Kitronix with configurable pulse widths.
  * This extension provides an additional block that allows the minimum and maximum pulse width of the servo signal to be set 
  * The original extension had the minimum pulse width at 550us and the maximum pulse width at 2700uS. These settings cause some servo 
  * motors to growl and over heat when positioned at 0 or 180 degrees. This situation will cause servo motors to fail.  
